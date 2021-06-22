@@ -11,6 +11,14 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 ```
+or
+
+```c++
+struct SinglyLinkedListNode {
+    int data;
+    SinglyLinkedListNode* next;
+ };
+```
 
 ### Insert node at the end of a list
 
@@ -39,10 +47,13 @@ SinglyLinkedListNode* insertNodeAtTail(SinglyLinkedListNode* head, int data) {
     // Move pointer until we reach the end of the list
     while (l->next != NULL)
     {
+        // Asigning to the pointer doesn't affect original list since only moves what are pointing to
         l = l->next;
     }
     
-    // Point the last node to a new node in the heap
+    // Point the last node to a new node
+    // since the helper pointer point to the last node, it's correct to use ->next
+    // that will affect to last node as if we were using it directly
     l->next = new SinglyLinkedListNode(data);
 
     // Return the head
