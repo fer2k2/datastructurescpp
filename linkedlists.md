@@ -305,3 +305,57 @@ bool has_cycle(SinglyLinkedListNode* head) {
     return false;
 }
 ```
+
+# Binary Trees
+```c++
+class Node {
+public:
+    int data;
+    Node* left;
+    Node* right;
+    Node(int d) {
+        data = d;
+        left = NULL;
+        right = NULL;
+    }
+};
+```
+
+## Tree traversal
+
+### In order
+```c++
+void InOrder(Node* root)
+{
+    if (root != NULL)
+    {
+        InOrder(root->left);
+        std::cout << root->data << " ";
+        InOrder(root->right);
+    }
+}
+```
+### Pre order
+```c++
+void PreOrder(Node* root)
+{
+    if (root != NULL)
+    {
+        std::cout << root->data << " ";
+        InOrder(root->left);
+        InOrder(root->right);
+    }
+}
+```
+### Post order
+```c++
+void PostOrder(Node* root)
+{
+    if (root != NULL)
+    {
+        InOrder(root->left);
+        InOrder(root->right);
+        std::cout << root->data << " ";
+    }
+}
+```
