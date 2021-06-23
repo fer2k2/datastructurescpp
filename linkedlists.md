@@ -1,7 +1,4 @@
 # Strings and Arrays
-```c++
-
-```
 ### Iterators
 
 #### Forward iterator loop
@@ -44,7 +41,22 @@ std::cout << *min_element(s.begin(), s.end());
 ```c++
 int sum = std::accumulate(v.begin(), v.end(), 0);
 ```
+#### Count
 
+
+#### Find
+
+
+#### Binary search
+
+
+#### Erase
+
+#### Unique
+
+#### Distance
+
+# Sets and maps
 
 # Linked Lists
 
