@@ -42,20 +42,69 @@ std::cout << *min_element(s.begin(), s.end());
 int sum = std::accumulate(v.begin(), v.end(), 0);
 ```
 #### Count
-
-
+```c++
+int n = 2;
+int counts = std::count(v.begin(), v.end(), n);
+```
 #### Find
-
-
-#### Binary search
-
-
+```c++
+auto result1 = std::find(begin(v), end(v), n1);
+```
+#### Find if
+```c++
+auto is_even = [](int i){ return i%2 == 0; };
+auto result3 = std::find_if(begin(v), end(v), is_even);
+```
+#### Binary search (for sorted arrays)
+```c++
+bool found = std::binary_search(haystack.begin(), haystack.end(), needle);
+```
 #### Erase
+```c++
+std::vector<int> c{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+print_container(c);
 
+c.erase(c.begin());
+print_container(c);
+
+c.erase(c.begin()+2, c.begin()+5);
+print_container(c);
+
+// Erase all even numbers (C++11 and later)
+for (auto it = c.begin(); it != c.end(); ) {
+    if (*it % 2 == 0) {
+        it = c.erase(it);
+    } else {
+        ++it;
+    }
+}
+```
 #### Unique
+```c++
+// remove consecutive (adjacent) duplicates
+auto last = std::unique(v.begin(), v.end());
+// v now holds {1 2 1 3 4 5 4 x x x}, where 'x' is indeterminate
+v.erase(last, v.end());
+print(2);
 
+// sort followed by unique, to remove all duplicates
+std::sort(v.begin(), v.end()); // {1 1 2 3 4 4 5}
+print(3);
+
+last = std::unique(v.begin(), v.end());
+// v now holds {1 2 3 4 5 x x}, where 'x' is indeterminate
+v.erase(last, v.end());
+print(4);
+```
 #### Distance
+```c++
+std::vector<int> v{ 3, 1, 4 };
 
+std::cout << "distance(first, last) = "
+    << std::distance(v.begin(), v.end()) << '\n'
+    << "distance(last, first) = "
+    << std::distance(v.end(), v.begin()) << '\n';
+```
 # Sets and maps
 
 # Linked Lists
