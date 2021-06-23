@@ -146,6 +146,30 @@ for(auto it = c.begin(); it != c.end(); ) {
 ```
 # Stacks and Queues
 
+## Stacks
+
+#### Push, Pop, Top
+```c++
+std::stack<int>   s;
+
+s.push( 2 );
+s.push( 6 );
+s.push( 51 );
+
+std::cout << s.size() << " elements on stack\n";
+std::cout << "Top element: "
+      << s.top()         // Leaves element on stack
+      << "\n";
+std::cout << s.size() << " elements on stack\n";
+s.pop();
+std::cout << s.size() << " elements on stack\n";
+std::cout << "Top element: " << s.top() << "\n";
+```
+
+## Queue
+
+#### Front, Back, Push, Pop
+
 # Linked Lists
 
 ## Singly-Linked List
