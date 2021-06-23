@@ -1,3 +1,51 @@
+# Strings and Arrays
+```c++
+
+```
+### Iterators
+
+#### Forward iterator loop
+```c++
+for (auto it = s.begin(); it != s.end(); ++it)
+{
+    std::cout << *it;
+}
+```
+#### Forward iterator loop
+```c++
+for (auto it = s.rbegin(); it != s.rend(); ++it)
+{
+    std::cout << *it;
+}
+```
+
+### Algorithms
+#### Reverse
+```c++
+std::reverse(s.begin(), s.end());
+```
+#### Sort (min to max)
+```c++
+std::sort(s.begin(), s.end());
+```
+#### Sort (max to min)
+```c++
+std::sort(s.begin(), s.end(), std::greater<int>());
+```
+#### Get max element
+```c++
+std::cout << *max_element(s.begin(), s.end());
+```
+#### Get min element
+```c++
+std::cout << *min_element(s.begin(), s.end());
+```
+#### Sum
+```c++
+int sum = std::accumulate(v.begin(), v.end(), 0);
+```
+
+
 # Linked Lists
 
 ## Singly-Linked List
