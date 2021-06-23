@@ -8,7 +8,7 @@ for (auto it = s.begin(); it != s.end(); ++it)
     std::cout << *it;
 }
 ```
-#### Forward iterator loop
+#### Reverse iterator loop
 ```c++
 for (auto it = s.rbegin(); it != s.rend(); ++it)
 {
@@ -106,6 +106,45 @@ std::cout << "distance(first, last) = "
     << std::distance(v.end(), v.begin()) << '\n';
 ```
 # Sets and maps
+
+## Sets
+
+#### Insert
+```c++
+std::set<int> set;
+ 
+auto result_1 = set.insert(3);
+assert(result_1.first != set.end()); // it's a valid iterator
+assert(*result_1.first == 3);
+if (result_1.second)
+    std::cout << "insert done\n";
+```
+## Maps
+
+#### Insert
+```c++
+std::map<std::string, float> karasunoPlayerHeights;
+
+const auto [it_hinata, success] = karasunoPlayerHeights.insert({"Hinata"s, 162.8});
+printInsertionStatus(it_hinata, success);
+```
+
+#### Erase
+```c++
+std::map<int, std::string> c = {
+    {1, "one" }, {2, "two" }, {3, "three"},
+    {4, "four"}, {5, "five"}, {6, "six"  }
+};
+
+// erase all odd numbers from c
+for(auto it = c.begin(); it != c.end(); ) {
+    if(it->first % 2 != 0)
+        it = c.erase(it);
+    else
+        ++it;
+}
+```
+# Stacks and Queues
 
 # Linked Lists
 
