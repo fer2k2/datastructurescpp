@@ -359,3 +359,83 @@ void PostOrder(Node* root)
     }
 }
 ```
+
+### Level order
+```c++
+vector<int> levelOrder(Node* node)
+{
+  vector<int> result;
+
+  queue<Node*> q;
+
+  q.push(node);
+
+
+  while (!q.empty())
+  {
+
+      Node* current = q.front();
+      q.pop();
+      if (current != NULL)
+      {
+          result.push_back(current->data);
+          q.push(current->left);
+          q.push(current->right);
+      }
+  }
+
+  return result;
+}
+```
+
+### Lowest common ansestor
+
+
+# Graphs
+
+## Representation
+
+
+## Grap Traversal
+### Depth first search (DFS)
+
+
+### Breath first search (BFS)
+```c++
+vector<int>bfsOfGraph(int V, vector<int> adj[])
+{
+    std::vector<int> response;
+
+    // Code here
+    vector<bool> vVisitedNodes(V);
+    std::queue<int> queue;
+
+    // Strat from the node 0;
+    // Mark it as visited
+    vVisitedNodes[0] = true;
+    response.push_back(0);
+    //std::cout << 0 << std::endl;
+
+    queue.push(0);
+
+    while(!queue.empty())
+    {
+        int current = queue.front();
+        queue.pop();
+
+        // Get all the adjacent nodes to the current
+        for (int i=0; i < adj[current].size(); i++)
+        {
+            if (!vVisitedNodes.at(adj[current][i]))
+            {
+                vVisitedNodes.at(adj[current][i]) = true;
+                response.push_back(adj[current][i]);
+                //std::cout << adj[current][i] << std::endl;
+                queue.push(adj[current][i]);
+            }
+        }
+    }
+
+    return response;
+}
+```
