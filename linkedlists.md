@@ -389,7 +389,28 @@ vector<int> levelOrder(Node* node)
 ```
 
 ### Lowest common ansestor
+```c++
+/* Function to find LCA of n1 and n2.
+The function assumes that both
+n1 and n2 are present in BST */
+node* lca(node* root, int n1, int n2)
+{
+    if (root == NULL) return NULL;
 
+    // If both n1 and n2 are smaller
+    // than root, then LCA lies in left 
+    if (root->data > n1 && root->data > n2)
+        return lca(root->left, n1, n2);
+
+    // If both n1 and n2 are greater than 
+    // root, then LCA lies in right 
+    if (root->data < n1 && root->data < n2)
+        return lca(root->right, n1, n2);
+
+    // Base case, if current node is between the nodes' values
+    return root;
+}
+```
 
 # Graphs
 
@@ -398,7 +419,22 @@ vector<int> levelOrder(Node* node)
 
 ## Grap Traversal
 ### Depth first search (DFS)
-
+```c++
+void Graph::DFS(int v)
+{
+    // Mark the current node as visited and
+    // print it
+    visited[v] = true;
+    cout << v << " ";
+ 
+    // Recur for all the vertices adjacent
+    // to this vertex
+    list<int>::iterator i;
+    for (i = adj[v].begin(); i != adj[v].end(); ++i)
+        if (!visited[*i])
+            DFS(*i);
+}
+```
 
 ### Breath first search (BFS)
 ```c++
