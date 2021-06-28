@@ -306,6 +306,31 @@ bool has_cycle(SinglyLinkedListNode* head) {
 }
 ```
 
+### Reverse list
+```c++
+ListNode* reverseList(ListNode* head) {
+    ListNode* prev = nullptr;
+    ListNode* curr = head;
+
+    while(curr != nullptr)
+    {
+        // Save temp
+        ListNode* nextTemp = curr->next;
+
+        // Point current node next to previous node
+        curr->next = prev;
+        // Prev now points to current completing the reverse
+        prev = curr;
+
+        // new current is the next node
+        curr = nextTemp;
+    }
+
+    // return the first node on the reversed list;
+    return prev;
+}
+```
+
 # Binary Trees
 ```c++
 class Node {
