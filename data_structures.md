@@ -105,6 +105,53 @@ std::cout << "distance(first, last) = "
     << "distance(last, first) = "
     << std::distance(v.end(), v.begin()) << '\n';
 ```
+
+### Algorithm Implementation
+
+#### Binary Search
+```c++
+int search(vector<int>& nums, int target) {
+    int size = nums.size();
+    int response = -1;
+
+    // If input size is 1
+    if (size == 1 && nums[0] == target)
+    {
+        return 0;
+    }
+
+    // Set the start and end
+    int start   = 0;
+    int end     = size - 1;
+
+    // Traverse the array
+    while (start <= end)
+    {
+        // Calculate the middle point each iteartion
+        int middle =  ((end - start) / 2) + start; 
+
+        // Return response if found
+        if (nums[middle]  == target)
+        {
+            return middle;
+        }
+
+        // If not. Split search window in a half
+        if (target < nums[middle])
+        {
+            end = middle - 1; 
+        }
+        else
+        {
+            start = middle + 1;
+        }
+
+    }
+
+    return response;
+}
+```
+
 # Sets and maps
 
 ## Sets
