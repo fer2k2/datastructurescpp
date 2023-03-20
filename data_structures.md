@@ -242,15 +242,6 @@ struct SinglyLinkedListNode {
 ### Insert node at the end of a list
 
 ```c++
-/*
- * For your reference:
- *
- * SinglyLinkedListNode {
- *     int data;
- *     SinglyLinkedListNode* next;
- * };
- *
- */
 SinglyLinkedListNode* insertNodeAtTail(SinglyLinkedListNode* head, int data) {
     // Special case, if head is NULL
     if (head == NULL)
