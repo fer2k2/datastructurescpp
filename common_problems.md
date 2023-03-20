@@ -67,6 +67,15 @@ bool FindSumOfThree(std::vector<int> nums, int target)
 ## Fast and slow pointer
 
 #### Happy number
+Write an algorithm to determine if a number nn is happy.
+
+A happy number is a number defined by the following process:
+
+    - Starting with any positive integer, replace the number by the sum of the squares of its digits.
+    - Repeat the process until the number equals 11 (where it will stay), or it loops endlessly in a cycle which does not include 11.
+    - Those numbers for which this process ends in 11 are happy.
+
+Return TRUE if nn is a happy number, and FALSE if not.
 ```c++
 bool IsHappyNumber(int n){
 
@@ -103,6 +112,7 @@ int SumDigits(int number)
 ## Sliding window
 
 #### Find maximum in sliding window
+Given an integer array nums and a window of size w, find the current maximum value in the window as it slides through the entire array.
 ```c++
 std::vector<int> FindMaxSlidingWindow(std::vector<int> &nums, int windowSize)
 {
@@ -188,6 +198,7 @@ std::vector<int> FindMaxSlidingWindow(std::vector<int> &nums, int windowSize)
 ```
 
 #### Minimum window subsequence
+Given strings str1 and str2, find the minimum (contiguous) substring subStr of str1, such that every character of str2 appears in subStr in the same order as it is present in str2.
 ```c++
 std::string MinWindow(std::string str1, std::string str2)
 {
