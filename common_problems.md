@@ -102,6 +102,158 @@ int SumDigits(int number)
 
 ## Sliding window
 
+#### Find maximum in sliding window
+```c++
+std::vector<int> FindMaxSlidingWindow(std::vector<int> &nums, int windowSize)
+{
+    std::vector<int> result;
+    // Initializing doubly ended queue for storing indices
+    std::deque<int> window;
+    
+    // If windowSize is greater than the array size,
+    // set the windowSize to nums.size()
+    if (windowSize > nums.size())
+    {
+        windowSize = nums.size();
+    }
+
+    // this variable is for the sole purpose of printing
+    bool check = false;
+
+    // Find out first maximum in the first window
+    std::cout << "Traversing to find maximum in the first window:" << std::endl;
+    for (int i = 0; i < windowSize; ++i)
+    {
+        // For every element, remove the previous smaller elements from window
+        while (!window.empty() && nums[i] >= nums[window.back()])
+        {
+            std::cout << "\t\tnums[" << i << "] = " << nums[i]
+                      << " is greater than or equal to nums[window[-1]] = " << nums[window.back()] << std::endl;
+            check = true;
+            window.pop_back();
+            std::cout << "\t\tWindow after popping: " << PrintD(window) << std::endl;
+        }
+        // this is only for the purpose of printing
+        if (!check){
+            if (!window.empty())
+                std::cout << "\t\tnums[" << i << "] = " << nums[i]
+                      << " is less than nums[window[-1]] = " << nums[window.back()] << std::endl;
+            else
+                std::cout << "\t\tThe window is empty." << std::endl;
+        }
+        check = false;
+
+        // Add current element at the back of the queue
+        window.push_back(i);
+    }
+    // Appending the largest element in the window to the result
+    result.push_back(nums[window.front()]);
+    std::cout << "Traversing to find maximum in remaining windows:" << std::endl;
+    for (int i = windowSize; i < nums.size(); ++i)
+    {
+        // remove all numbers that are smaller than current number
+        // from the tail of list
+        while (!window.empty() && nums[i] >= nums[window.back()])
+        {
+            check = true;
+            std::cout << "\t\tnums[" << i << "] = " << nums[i]
+                      << " is greater than or equal to nums[window[-1]] = " << nums[window.back()] << std::endl;
+            window.pop_back();
+            std::cout << "\t\tWindow after popping: " << PrintD(window) << std::endl;
+        }
+        
+        // this is only for the purpose of printing
+        if (!check){
+            if (!window.empty())
+                std::cout << "\t\tnums[" << i << "] = " << nums[i]
+                      << " is less than nums[window[-1]] = " << nums[window.back()] << std::endl;
+            else
+                std::cout << "\t\tThe window is empty." << std::endl;
+        }
+        check = false;
+
+
+        // Remove first index from the window deque if
+        // it doesn't fall in the current window anymore
+        if (!window.empty() && window.front() <= i - windowSize)
+        {
+            window.pop_front();
+        }
+        // Add current element at the back of the queue
+        window.push_back(i);
+        result.push_back(nums[window.front()]);
+    }
+    return result;
+}
+```
+
+#### Minimum window subsequence
+```c++
+std::string MinWindow(std::string str1, std::string str2)
+{
+    // Save the length of str1 and str2
+    int sizeStr1 = str1.length(), sizeStr2 = str2.length();
+    // Initialize length to a very large number (infinity)
+    int length = INT_MAX;
+    // Initialize pointers to zero and the min_subsequence to an empty string
+    int indexS1 = 0, indexS2 = 0;
+    std::string minSubsequence = "";
+
+    // Process every character of str1
+    while (indexS1 < sizeStr1)
+    {
+        // Check if the character pointed by indexS1 in str1
+        // is the same as the character pointed by indexS2 in str2
+        if (str1[indexS1] == str2[indexS2])
+        {
+            // If the pointed character is the same
+            // in both strings increment indexS2
+            indexS2 += 1;
+            // Check if indexS2 has reached the end of str2
+            if (indexS2 == sizeStr2)
+            {
+                // At this point the str1 contains all characters of str2
+                int start = indexS1, end = indexS1 + 1;
+                // Initialize start to the index where all characters of
+                // str2 were present in str1
+                indexS2 -= 1;
+                // Decrement pointer indexS2 and start a reverse loop
+                while (indexS2 >= 0)
+                {
+                    // Decrement pointer indexS2 until all characters of
+                    //  str2 are found in str1
+                    if (str1[start] == str2[indexS2])
+                    {
+                        indexS2 -= 1;
+                    }
+                    // Decrement start pointer everytime to find the
+                    // starting point of the required subsequence
+                    start -= 1;
+                }
+                start += 1;
+                // Check if length of sub sequence pointed
+                // by start and end pointers is less than current min length
+                if (end - start < length)
+                {
+                    // Update length if current sub sequence is shorter
+                    length = end - start;
+                    // Update minimum subsequence string
+                    // to this new shorter string
+                    minSubsequence = str1.substr(start, length);
+                }
+                // Set indexS1 to start to continue checking in str1
+                // after this discovered subsequence
+                indexS1 = start;
+                indexS2 = 0;
+            }
+        }
+        // Increment pointer indexS1 to check next character in str1
+        indexS1 += 1;
+    }
+    return minSubsequence;
+}
+```
+
 ## Linked List
 
 #### Insert node at the end of a list
@@ -237,6 +389,46 @@ bool DetectCycle(EduLinkedListNode* head){
 
 ## Stack
 
+#### Valid parentheses
+```c++
+bool isValid(string s) {
+    stack<char> st;
+    map<char, char> chars = { {'(', ')'}, {'[', ']'}, {'{', '}'} };
+
+    for (auto c : s)
+    {
+        if (chars.find(c) != chars.end())
+        {
+            st.push(c);
+        }
+        else
+        {
+            if (st.empty())
+            {
+                return false;
+            } 
+
+            if (chars[st.top()] != c)
+            {
+                return false;
+            }
+            else
+            {
+                st.pop();
+            }
+        }
+    }
+
+    if (!st.empty())
+    {
+        return false;
+    }
+
+    return true;
+}
+```
+
+
 ## Trees
 
 ### Tree traversal
@@ -330,4 +522,64 @@ node* lca(node* root, int n1, int n2)
 
 ## BSTs
 
+#### Validate BST
+```c++
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        return helper(root, LONG_MIN, LONG_MAX);
+    }
+private:
+    bool helper(TreeNode* root, long left, long right){
+        if (!root)
+            return true;
+        if (root->val < right && root->val > left){
+            return helper(root->left, left, root->val) && helper(root->right, root->val, right);
+        }
+        return false;
+    }
+};
+```
+
 ## Binary Search
+
+#### Classic binary search
+```c++
+int search(vector<int>& nums, int target) {
+        
+    int size = nums.size();
+    int response = -1;
+
+    if (size == 1 && nums[0] == target)
+    {
+        return 0;
+    }
+
+    int start   = 0;
+    int end     = size - 1;
+
+
+    while (start <= end)
+    {
+        int middle =  ((end - start) / 2) + start; 
+
+        if (nums[middle]  == target)
+        {
+            return middle;
+        }
+
+        if (target < nums[middle])
+        {
+            end = middle - 1;
+            
+        }
+        else
+        {
+            start = middle + 1;
+        }
+
+    }
+
+    return response;
+}
+```
